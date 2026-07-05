@@ -125,7 +125,7 @@ function checkFlood(channelId: string, authorId: string, messageId: string, time
     authorTimestamps.set(key, list);
 
     if (list.length >= threshold) {
-        tempBlockUser(authorId, "User spaming", channelId);
+        tempBlockUser(authorId, "User flood", channelId);
         return true;
     }
     return false;
@@ -144,17 +144,17 @@ const settings = definePluginSettings({
     },
     enableFloodDetection: {
         type: OptionType.BOOLEAN,
-        description: "Enable spaming detecting",
+        description: "Enable flood detecting",
         default: true
     },
     floodMessageCount: {
         type: OptionType.NUMBER,
-        description: "Spaming amount",
+        description: "Flood amount",
         default: 5
     },
     floodTimeWindow: {
         type: OptionType.NUMBER,
-        description: "Spaming time(ms)",
+        description: "Flood time(ms)",
         default: 1500
     },
     tempBlockDuration: {
@@ -226,7 +226,7 @@ function fluxInterceptor(event: any): boolean {
 
 export default definePlugin({
     name: PLUGIN_NAME,
-    description: "Block user spaming, keywords, and temporary blocking",
+    description: "Block user flood, keywords, and temporary blocking",
     authors: [Devs?.commandcat ?? { name: "command_cat", id: 1058383460043083787n }],
     settings,
 
